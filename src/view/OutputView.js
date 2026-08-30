@@ -1,4 +1,4 @@
-import MESSAGES from "../constants/Messages.js";
+import MESSAGES from "./Messages.js";
 import {Console} from '@woowacourse/mission-utils';
 
 class OutputView{

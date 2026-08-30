@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import InputManager from './InputManager/InputManager.js';
+import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
 import LottoNumberParser from './parser/LottoNumberParser.js';
@@ -28,7 +28,7 @@ class App {
   async inputPCUntilValid() {
     while (true) {
       try {
-        const input = await InputManager.inputPurchaseCost();
+        const input = await InputView.inputPurchaseCost();
         return Validator.validatePurchaseCostInput(input);
       } catch (error) {
         Console.print(error.message);
@@ -39,7 +39,7 @@ class App {
   async inputWNUntilValid() {
     while (true) {
       try {
-        const input = await InputManager.inputWinningNumber();
+        const input = await InputView.inputWinningNumber();
         const numbers = LottoNumberParser.parse(input);
 
         return new Lotto(numbers);
@@ -52,7 +52,7 @@ class App {
   async inputBNUntilValid(winningLotto) {
     while (true) {
       try {
-        const input = await InputManager.inputBonusNumber();
+        const input = await InputView.inputBonusNumber();
         return Validator.validateBonusNumberInput(input, winningLotto.getNumbers(), );
       } catch (error) {
         Console.print(error.message);

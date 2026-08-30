@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
-import MESSAGES from '../constants/Messages.js';
+import MESSAGES from './Messages.js';
 
-class InputManager {
+class InputView {
   static async inputPurchaseCost() {
     return await Console.readLineAsync(MESSAGES.INPUT_PURCHASE_COST_MSG);
   }
@@ -15,4 +15,4 @@ class InputManager {
   }
 }
 
-export default InputManager;
+export default InputView;
