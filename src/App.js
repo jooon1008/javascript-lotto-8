@@ -6,21 +6,24 @@ import LottoNumberParser from './parser/LottoNumberParser.js';
 import Validator from './Validator.js';
 import { TICKET_PRICE } from './constants/Enum.js';
 import LottoGenerator from './LottoGenerator.js';
+import LottoGame from './LottoGame.js';
 
 class App {
   async run() {
     const purchaseCost = await this.inputPCUntilValid();
     const purchaseQuantity = Number(purchaseCost) / TICKET_PRICE;
-    const myLotto = LottoGenerator.generate(purchaseQuantity);
+    const myLottos = LottoGenerator.generate(purchaseQuantity);
     OutputView.printPurchaseMessage(purchaseQuantity);
-    OutputView.printMyLotto(myLotto);
+    OutputView.printMyLotto(myLottos);
 
     const winningLotto = await this.inputWNUntilValid();
 
     const bonusNumber = await this.inputBNUntilValid(winningLotto);
 
-
-
+    const results = LottoGame.getResults(myLottos,winningLotto,bonusNumber);
+    const rateOfReturn = LottoGame.getRateOfReturn(results,purchaseCost);
+    OutputView.printResult(results);
+    OutputView.printRateOfReturn(rateOfReturn);
   }
 
 
