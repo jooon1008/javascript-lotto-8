@@ -10,21 +10,16 @@ import LottoGame from './LottoGame.js';
 class App {
   async run() {
     const purchaseCost = await this.inputPCUntilValid();
-    const purchaseQuantity = purchaseCost / TICKET_PRICE;
-    const myLottos = LottoGenerator.generate(purchaseQuantity);
-    OutputView.printPurchaseMessage(purchaseQuantity);
-    OutputView.printMyLotto(myLottos);
+    const myLottos = LottoGenerator.generate(purchaseCost);//금액에 맞춰 오름차순 로또 생성
+    OutputView.printPurchaseInfo(myLottos);//구매한 로또 출력
 
     const winningLotto = await this.inputWNUntilValid();
-
     const bonusNumber = await this.inputBNUntilValid(winningLotto);
 
     const results = LottoGame.getResults(myLottos,winningLotto,bonusNumber);
     const rateOfReturn = LottoGame.getRateOfReturn(results,purchaseCost);
-    OutputView.printResult(results);
-    OutputView.printRateOfReturn(rateOfReturn);
+    OutputView.printGameResults(results, rateOfReturn);//게임결과, 수익률 출력
   }
-
 
   //유효할 때까지 입력받기
   async inputPCUntilValid() {

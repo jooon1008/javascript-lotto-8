@@ -10,7 +10,7 @@ describe('LottoGenerator 테스트', () => {
     jest.spyOn(Random, 'pickUniqueNumbersInRange')
       .mockReturnValue([1, 2, 3, 4, 5, 6]);
 
-    const lottos = LottoGenerator.generate(3);
+    const lottos = LottoGenerator.generate(3000);
 
     expect(lottos).toHaveLength(3);
     expect(lottos.every(lotto => lotto.getNumbers().length === 6)).toBe(true);

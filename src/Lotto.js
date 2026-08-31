@@ -10,6 +10,7 @@ class Lotto {
   }
 
   #validate(numbers) {
+    this.#validateNumsIsNum(numbers);
     this.#validateNumsCount(numbers);
     this.#validateNumsIsInRange(numbers);
     this.#validateDup(numbers);
@@ -19,6 +20,14 @@ class Lotto {
     if (numbers.length !== WINNING_NUMBER_COUNT) {
       throw new Error(ERROR_MESSAGES.WINNING_NUMBER_NOT_SIX);
     }
+  }
+
+  #validateNumsIsNum(numbers){
+    numbers.forEach(number => {
+      if (!Number.isInteger(number)) {
+        throw new Error(ERROR_MESSAGES.NUMBER_NOT_NUMBER);
+      }
+    });
   }
 
   #validateNumsIsInRange(numbers) {
