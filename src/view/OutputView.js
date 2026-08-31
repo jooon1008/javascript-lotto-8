@@ -23,6 +23,9 @@ class OutputView{
   static printRateOfReturn(rateOfReturn){
     Console.print(MESSAGES.RATE_OF_RETURN_MSG(rateOfReturn));
   }
+  static printError(message){
+    Console.print(message);
+  }
 
 }
 export default OutputView;

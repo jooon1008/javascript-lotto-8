@@ -1,6 +1,5 @@
-import { WINNING_NUMBER_COUNT } from './constants/Enum.js';
+import { WINNING_NUMBER_COUNT, NUMBER_MAX, NUMBER_MIN } from './constants/Enum.js';
 import ERROR_MESSAGES from './constants/ErrorMessages.js';
-import Validator from './Validator.js';
 
 class Lotto {
   #numbers;
@@ -24,7 +23,7 @@ class Lotto {
 
   #validateNumsIsInRange(numbers) {
     numbers.forEach(number => {
-      if (!Number.isInteger(number) || !Validator.isInRange(number)) {
+      if (!Number.isInteger(number) || !(number >= NUMBER_MIN && number <= NUMBER_MAX)) {
         throw new Error(ERROR_MESSAGES.NUMBER_NOT_IN_RANGE);
       }
     });

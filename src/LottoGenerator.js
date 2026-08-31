@@ -7,7 +7,7 @@ class LottoGenerator{
     const myLotto = new Array();
     
     for ( let i = 0; i< quantity; i++){
-      const temp = new Lotto(Random.pickUniqueNumbersInRange(NUMBER_MIN, NUMBER_MAX, WINNING_NUMBER_COUNT));
+      const temp = new Lotto(Random.pickUniqueNumbersInRange(NUMBER_MIN, NUMBER_MAX, WINNING_NUMBER_COUNT).sort((a,b)=>a-b));
       myLotto.push(temp);
     }
 

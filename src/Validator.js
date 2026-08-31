@@ -14,8 +14,6 @@ class Validator {
     if (number % TICKET_PRICE !== 0) {
       throw new Error(ERROR_MESSAGES.PURCHASE_COST_NOT_DIVISIBLE);
     }
-
-    return number;
   }
 
   static validateBonusNumberInput(input, winningNumbers = []) {
@@ -30,8 +28,6 @@ class Validator {
     if (winningNumbers.includes(number)) {
       throw new Error(ERROR_MESSAGES.BONUS_NUMBER_DUPLICATED);
     }
-
-    return number;
   }
 
   static isNum(input) {

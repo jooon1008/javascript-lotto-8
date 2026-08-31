@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Lotto from './Lotto.js';
@@ -11,7 +10,7 @@ import LottoGame from './LottoGame.js';
 class App {
   async run() {
     const purchaseCost = await this.inputPCUntilValid();
-    const purchaseQuantity = Number(purchaseCost) / TICKET_PRICE;
+    const purchaseQuantity = purchaseCost / TICKET_PRICE;
     const myLottos = LottoGenerator.generate(purchaseQuantity);
     OutputView.printPurchaseMessage(purchaseQuantity);
     OutputView.printMyLotto(myLottos);
@@ -32,9 +31,11 @@ class App {
     while (true) {
       try {
         const input = await InputView.inputPurchaseCost();
-        return Validator.validatePurchaseCostInput(input);
+        Validator.validatePurchaseCostInput(input);
+
+        return Number(input);
       } catch (error) {
-        Console.print(error.message);
+        OutputView.printError(error.message);
       }
     }
   }
@@ -47,7 +48,7 @@ class App {
 
         return new Lotto(numbers);
       } catch (error) {
-        Console.print(error.message);
+        OutputView.printError(error.message);
       }
     }
   }
@@ -56,9 +57,11 @@ class App {
     while (true) {
       try {
         const input = await InputView.inputBonusNumber();
-        return Validator.validateBonusNumberInput(input, winningLotto.getNumbers(), );
+        Validator.validateBonusNumberInput(input, winningLotto.getNumbers());
+
+        return Number(input);
       } catch (error) {
-        Console.print(error.message);
+        OutputView.printError(error.message);
       }
     }
   }

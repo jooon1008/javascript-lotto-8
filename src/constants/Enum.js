@@ -19,3 +19,10 @@ export const PRIZE = {
   FIFTH : 5000
 };
 
+export const RANK_RULE = [
+  {rank: RANK.FIRST, requiredCount: 6 },
+  {rank: RANK.SECOND, requiredCount: 5, bonusRequired: true },
+  {rank: RANK.THIRD, requiredCount: 5 },
+  {rank: RANK.FOURTH, requiredCount: 4 },
+  {rank: RANK.FIFTH, requiredCount: 3 },
+];

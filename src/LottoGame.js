@@ -1,4 +1,4 @@
-import { RANK , PRIZE} from "./constants/Enum.js";
+import { RANK, PRIZE, RANK_RULE } from "./constants/Enum.js";
 
 class LottoGame{
   static getResults(myLottos,winningLotto,bonusNumber){
@@ -6,26 +6,19 @@ class LottoGame{
 
     for ( const lotto of myLottos ){
       const count = this.countMatches(lotto.getNumbers(), winningLotto.getNumbers());
-      const isHasBonusNumber = lotto.hasBonusNumber(bonusNumber);
+      const hasBounusNumber = lotto.hasBonusNumber(bonusNumber);
 
-      if ( count === 6){
-        results[RANK.FIRST]++;
-      }
-      else if (count === 5 && isHasBonusNumber){
-        results[RANK.SECOND]++;
-      }
-      else if (count === 5 || (count === 4 && isHasBonusNumber)){
-        results[RANK.THIRD]++;
-      }
-      else if (count === 4 || (count === 3 && isHasBonusNumber)){
-        results[RANK.FOURTH]++;
-      }
-      else if (count === 3 || (count === 2 && isHasBonusNumber)){
-        results[RANK.FIFTH]++;
-      }
+      const rank = this.getRank(count,hasBounusNumber);
+      if( rank !== null) results[rank]++;
     }
 
     return results;
+  }
+
+  static getRank(count, hasBounusNumber){
+    const rule = RANK_RULE.find(({requiredCount, bonusRequired})=> count === requiredCount && (hasBounusNumber || !bonusRequired));
+    if ( rule ) return rule.rank;
+    return null;
   }
 
   static countMatches(lotto, winningLotto){
